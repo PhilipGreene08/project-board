@@ -4,10 +4,24 @@ const form = document.querySelector(`.new-todo-form`)
 const ul = document.querySelector(`.todos-list`)
 const deleteAllButton = document.querySelector(`.delete-all-button`)
 
+
 form.addEventListener('submit', addToDo)
 deleteAllButton.addEventListener(`click`, deleteAllFunction)
 
 let masterTodoList = []
+
+ul.addEventListener(`click`, deleteItem)
+
+function deleteItem() {
+    let clicked = event.target
+    if (clicked.classList.contains(`fa-trash`)) {
+        console.log(`yes`);
+        let selectedNode = clicked.parentElement
+        selectedNode.parentElement.removeChild(selectedNode)
+    } else {
+        console.log(`no`);
+    }
+}
 
 //onload, render todos list
 renderTodos(masterTodoList)
@@ -18,6 +32,7 @@ function addToDo(event) {
     newTodo.value = ``
     saveToLocalStorage()
     renderTodos(masterTodoList)
+
 }
 
 function renderTodos(masterTodoList) {
@@ -36,6 +51,7 @@ function renderTodos(masterTodoList) {
             li.innerHTML = `<p>${todo}</p> <i class="fas fa-trash"></i> <i class="far fa-edit"></i>`
             ul.appendChild(li)
         })
+
     } else {
         console.log(`no data`);
     }
