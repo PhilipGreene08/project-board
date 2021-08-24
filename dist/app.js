@@ -2,8 +2,10 @@ const newTodo = document.querySelector(`.new-todo-input`)
 const submit = document.querySelector(`.new-todo-submit`)
 const form = document.querySelector(`.new-todo-form`)
 const ul = document.querySelector(`.todos-list`)
+const deleteAllButton = document.querySelector(`.delete-all-button`)
 
 form.addEventListener('submit', addToDo)
+deleteAllButton.addEventListener(`click`, deleteAllFunction)
 
 let masterTodoList = []
 
@@ -19,22 +21,31 @@ function addToDo(event) {
 }
 
 function renderTodos(masterTodoList) {
-    //clear screen of all todos and empty the masterToDoList to avoid double todos
-    ul.innerHTML = ``
-    masterTodoList = []
+    if (masterTodoList.length > 0) {
+        //clear screen of all todos and empty the masterToDoList to avoid double todos
+        ul.innerHTML = ``
+        masterTodoList = []
 
-    // get items from LS
-    let storedItems = JSON.parse(localStorage.getItem(`Full List`))
-    masterTodoList.push(storedItems)
-    console.log(masterTodoList);
-    console.log(storedItems);
-    // for each todo, create element and render in DOM
-    storedItems.forEach(todo => {
-        const li = document.createElement(`li`)
-        li.classList.add(`todo`)
-        li.textContent = `${todo}`
-        ul.appendChild(li)
-    })
+        // get items from LS
+        let storedItems = JSON.parse(localStorage.getItem(`Full List`))
+        masterTodoList.push(storedItems)
+        // for each todo, create element and render in DOM
+        storedItems.forEach(todo => {
+            const li = document.createElement(`li`)
+            li.classList.add(`todo`)
+            li.innerHTML = `<p>${todo}</p> <i class="fas fa-trash"></i> <i class="far fa-edit"></i>`
+            ul.appendChild(li)
+        })
+    } else {
+        console.log(`no data`);
+    }
+}
+
+
+
+function deleteAllFunction() {
+    ul.innerHTML = ``
+    localStorage.clear()
 }
 
 // save list to LS
