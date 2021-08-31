@@ -48,11 +48,9 @@ function deleteItem() {
         let selectedNode = clicked.parentElement
         let idOfItemToRemove = selectedNode.id
         let itemArray = JSON.parse(localStorage.getItem(`Full List`))
-        console.log(itemArray);
         itemArray.splice(`${idOfItemToRemove}`, 1)
-        console.log(itemArray);
-        console.log(idOfItemToRemove);
-        console.log(JSON.parse(localStorage.getItem(`Full List`))[`${idOfItemToRemove}`]);
+        localStorage.clear(`Full List`)
+        localStorage.setItem(`Full List`, JSON.stringify(itemArray))
         selectedNode.parentElement.removeChild(selectedNode)
 
     } else {
