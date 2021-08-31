@@ -25,7 +25,6 @@ function addToDo(event) {
 
 function renderTodos() {
     masterTodoList = JSON.parse(localStorage.getItem('Full List')) || [] //need to keep this line or they wont render onload
-    console.log(masterTodoList);
     if (masterTodoList.length > 0) {
         console.log(`yes`);
         ul.innerHTML = ``
@@ -44,11 +43,18 @@ function renderTodos() {
 
 function deleteItem() {
     let clicked = event.target
-    console.log(event.target.parentElement);
-    console.log(clicked);
+    //delete item from stored array
     if (clicked.classList.contains(`fa-trash`)) {
         let selectedNode = clicked.parentElement
+        let idOfItemToRemove = selectedNode.id
+        let itemArray = JSON.parse(localStorage.getItem(`Full List`))
+        console.log(itemArray);
+        itemArray.splice(`${idOfItemToRemove}`, 1)
+        console.log(itemArray);
+        console.log(idOfItemToRemove);
+        console.log(JSON.parse(localStorage.getItem(`Full List`))[`${idOfItemToRemove}`]);
         selectedNode.parentElement.removeChild(selectedNode)
+
     } else {
         console.log(`no`);
     }
