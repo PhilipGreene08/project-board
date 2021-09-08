@@ -17,7 +17,7 @@ window.onload = function () {
 
 function addToDo(event) {
     event.preventDefault()
-    masterTodoList.push(newTodo.value)
+    //masterTodoList.push(newTodo.value) //dont need to push todo to master list - repetitive code it seems
     saveToLocalStorage(newTodo.value)
     newTodo.value = ``
     renderTodos()
@@ -45,13 +45,13 @@ function deleteItem() {
     let clicked = event.target
     //delete item from stored array
     if (clicked.classList.contains(`fa-trash`)) {
-        let selectedNode = clicked.parentElement
-        let idOfItemToRemove = selectedNode.id
-        let itemArray = JSON.parse(localStorage.getItem(`Full List`))
-        itemArray.splice(`${idOfItemToRemove}`, 1)
-        localStorage.clear(`Full List`)
-        localStorage.setItem(`Full List`, JSON.stringify(itemArray))
-        selectedNode.parentElement.removeChild(selectedNode)
+        let selectedNode = clicked.parentElement //node to be removed
+        let idOfItemToRemove = selectedNode.id //id of item to remove
+        let itemArray = JSON.parse(localStorage.getItem(`Full List`)) //get items save to local storage
+        itemArray.splice(`${idOfItemToRemove}`, 1) //remove selected item based on ID from idOfItemToRemove
+        localStorage.clear(`Full List`) //clear LS
+        localStorage.setItem(`Full List`, JSON.stringify(itemArray)) //save new array to LS
+        selectedNode.parentElement.removeChild(selectedNode) //remove node from DOM
 
     } else {
         console.log(`no`);
@@ -65,7 +65,8 @@ function deleteAllFunction() {
 
 // save list to LS
 function saveToLocalStorage(data) {
-    let masterTodoList = []
+    // let masterTodoList = [] //unneeded code i think
+    //need to add || [] to end of next line - find out why (masterTodoList = JSON.parse(localStorage.getItem('Full List')) || [])
     masterTodoList = JSON.parse(localStorage.getItem('Full List')) || []
     masterTodoList.push(data)
     localStorage.setItem(`Full List`, JSON.stringify(masterTodoList))
