@@ -1,4 +1,4 @@
-const newTodo = document.querySelector(`.new-todo-input`)
+let newTodo = document.querySelector(`.new-todo-input`)
 const submit = document.querySelector(`.new-todo-submit`)
 const form = document.querySelector(`.new-todo-form`)
 const ul = document.querySelector(`.todos-list`)
@@ -8,6 +8,7 @@ const deleteAllButton = document.querySelector(`.delete-all-button`)
 form.addEventListener('submit', addToDo)
 deleteAllButton.addEventListener(`click`, deleteAllFunction)
 ul.addEventListener(`click`, deleteItem)
+ul.addEventListener(`click`, editToDo)
 
 let masterTodoList = []
 
@@ -55,6 +56,19 @@ function deleteItem() {
 
     } else {
         console.log(`no`);
+    }
+}
+
+function editToDo() {
+    let clicked = event.target
+    if (clicked.classList.contains(`fa-edit`)) {
+        let valueToEdit = clicked.parentElement.textContent //get value we want to appear in search bar
+        let idOfItemToEdit = clicked.parentElement.id //get id of item
+        newTodo.value = valueToEdit // set search bar to contain value to be edited
+        let itemArray = JSON.parse(localStorage.getItem(`Full List`)) // get all saved items from LS
+        itemArray.splice(`${idOfItemToEdit}`, 1) //remove item that is being edited from our array
+        localStorage.clear(`Full List`) //clear local storage
+        localStorage.setItem(`Full List`, JSON.stringify(itemArray)) //set new local storage with our new updated array
     }
 }
 
