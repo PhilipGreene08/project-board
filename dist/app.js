@@ -7,8 +7,9 @@ const deleteAllButton = document.querySelector(`.delete-all-button`)
 
 form.addEventListener('submit', addToDo)
 deleteAllButton.addEventListener(`click`, deleteAllFunction)
-ul.addEventListener(`click`, deleteItem)
-ul.addEventListener(`click`, editToDo)
+// ul.addEventListener(`click`, deleteItem)
+// ul.addEventListener(`click`, editToDo)
+ul.addEventListener(`click`, modifyToDo)
 
 let masterTodoList = []
 
@@ -42,9 +43,9 @@ function renderTodos() {
     }
 }
 
-function deleteItem() {
+function modifyToDo() {
     let clicked = event.target
-    //delete item from stored array
+
     if (clicked.classList.contains(`fa-trash`)) {
         let selectedNode = clicked.parentElement //node to be removed
         let idOfItemToRemove = selectedNode.id //id of item to remove
@@ -54,14 +55,7 @@ function deleteItem() {
         localStorage.setItem(`Full List`, JSON.stringify(itemArray)) //save new array to LS
         selectedNode.parentElement.removeChild(selectedNode) //remove node from DOM
 
-    } else {
-        console.log(`no`);
-    }
-}
-
-function editToDo() {
-    let clicked = event.target
-    if (clicked.classList.contains(`fa-edit`)) {
+    } else if (clicked.classList.contains(`fa-edit`)) {
         let valueToEdit = clicked.parentElement.textContent //get value we want to appear in search bar
         let idOfItemToEdit = clicked.parentElement.id //get id of item
         newTodo.value = valueToEdit // set search bar to contain value to be edited
@@ -69,8 +63,40 @@ function editToDo() {
         itemArray.splice(`${idOfItemToEdit}`, 1) //remove item that is being edited from our array
         localStorage.clear(`Full List`) //clear local storage
         localStorage.setItem(`Full List`, JSON.stringify(itemArray)) //set new local storage with our new updated array
+    } else {
+        console.log(`No click `);
     }
 }
+
+// function deleteItem() {
+//     let clicked = event.target
+//     //delete item from stored array
+//     if (clicked.classList.contains(`fa-trash`)) {
+//         let selectedNode = clicked.parentElement //node to be removed
+//         let idOfItemToRemove = selectedNode.id //id of item to remove
+//         let itemArray = JSON.parse(localStorage.getItem(`Full List`)) //get items save to local storage
+//         itemArray.splice(`${idOfItemToRemove}`, 1) //remove selected item based on ID from idOfItemToRemove
+//         localStorage.clear(`Full List`) //clear LS
+//         localStorage.setItem(`Full List`, JSON.stringify(itemArray)) //save new array to LS
+//         selectedNode.parentElement.removeChild(selectedNode) //remove node from DOM
+
+//     } else {
+//         console.log(`no`);
+//     }
+// }
+
+// function editToDo() {
+//     let clicked = event.target
+//     if (clicked.classList.contains(`fa-edit`)) {
+//         let valueToEdit = clicked.parentElement.textContent //get value we want to appear in search bar
+//         let idOfItemToEdit = clicked.parentElement.id //get id of item
+//         newTodo.value = valueToEdit // set search bar to contain value to be edited
+//         let itemArray = JSON.parse(localStorage.getItem(`Full List`)) // get all saved items from LS
+//         itemArray.splice(`${idOfItemToEdit}`, 1) //remove item that is being edited from our array
+//         localStorage.clear(`Full List`) //clear local storage
+//         localStorage.setItem(`Full List`, JSON.stringify(itemArray)) //set new local storage with our new updated array
+//     }
+// }
 
 function deleteAllFunction() {
     ul.innerHTML = ``
