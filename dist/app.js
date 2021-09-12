@@ -34,8 +34,9 @@ function renderTodos() {
             let indexNumber = masterTodoList.indexOf(`${todo}`)
             const li = document.createElement(`li`)
             li.setAttribute('id', `${indexNumber}`)
+            li.setAttribute(`status`, `unfinished`)
             li.classList.add(`todo`)
-            li.innerHTML = `<p>${todo}</p> <i class="fas fa-trash"></i> <i class="far fa-edit"></i>`
+            li.innerHTML = `<i class="fas fa-circle"></i> <p>${todo}</p> <i class="fas fa-trash"></i> <i class="far fa-edit"></i>`
             ul.appendChild(li)
         });
     } else {

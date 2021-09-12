@@ -4,8 +4,121 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: $dark-color;
 }
 
-ul {
+body {
+    background-color: $light-color;
+    font-family: $font-stack;
+    line-height: 1.5;
+    background: linear-gradient(180deg, $primary-color, $secondary-color);
+    height: 100vh;
     
 }
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $dark-color;
+    
+    h1 {
+      color: $light-color; 
+      font-size: 30px; 
+        padding: 10px;
+    }
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+
+            input {
+                border: hidden;
+            }
+
+        button {
+            border: none;
+            background-color: $dark-color;
+            color: $light-color;
+            font-family: inherit;
+            margin: 5px 0px;
+            padding: 5px;
+            cursor: pointer;
+            border-radius: 10px;
+            width: $normal-button-size;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: scale(1.1);
+        }
+    }
+}
+
+.section-list {
+
+    .list-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            li {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                margin: 10px 10px;
+                padding: 10px 5px;
+                border-top: 2px solid $dark-color;
+                border-bottom: 2px solid $dark-color;
+                
+
+                p {
+                    min-width: 100px;
+                }
+            }
+        }
+    }
+}
+
+.section-delete-all {
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .delete-all-container {
+       
+
+            button {
+                border: none;
+                background-color: $dark-color;
+                color: $light-color;
+                font-family: $font-stack;
+                margin: 5px 0px;
+                padding: 5px;
+                cursor: pointer;
+                border-radius: 10px;
+                width: $normal-button-size;
+        }
+    }
+
+    
+}
+
+// .fa-circle {
+//     color: red;
+// }
