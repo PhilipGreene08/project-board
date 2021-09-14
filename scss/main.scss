@@ -84,8 +84,15 @@ body {
                 padding: 10px 5px;
                 border-top: 2px solid $dark-color;
                 border-bottom: 2px solid $dark-color;
-                
 
+                .unfinished {
+                    color: red;
+                }
+
+                .finished {
+                    color: green;
+                }
+                
                 p {
                     min-width: 100px;
                 }
@@ -103,7 +110,7 @@ body {
     .delete-all-container {
        
 
-            button {
+        button {
                 border: none;
                 background-color: $dark-color;
                 color: $light-color;
@@ -114,11 +121,11 @@ body {
                 border-radius: 10px;
                 width: $normal-button-size;
         }
-    }
 
-    
+        button:hover {
+            opacity: 0.9;
+            transform: scale(1.1);
+        } 
+}   
+
 }
-
-// .fa-circle {
-//     color: red;
-// }

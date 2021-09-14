@@ -36,7 +36,7 @@ function renderTodos() {
             li.setAttribute('id', `${indexNumber}`)
             li.setAttribute(`status`, `unfinished`)
             li.classList.add(`todo`)
-            li.innerHTML = `<i class="fas fa-circle"></i> <p>${todo}</p> <i class="fas fa-trash"></i> <i class="far fa-edit"></i>`
+            li.innerHTML = `<i class="fas fa-circle unfinished"></i> <p>${todo}</p> <i class="fas fa-trash"></i> <i class="far fa-edit"></i>`
             ul.appendChild(li)
         });
     } else {
@@ -64,6 +64,13 @@ function modifyToDo() {
         itemArray.splice(`${idOfItemToEdit}`, 1) //remove item that is being edited from our array
         localStorage.clear(`Full List`) //clear local storage
         localStorage.setItem(`Full List`, JSON.stringify(itemArray)) //set new local storage with our new updated array
+
+    } else if (clicked.classList.contains(`fa-circle`)) {
+        let valueToStrike = clicked.parentElement.textContent
+        // let idOfItemToStrike = clicked.parentElement.id
+        console.log(valueToStrike);
+        clicked.classList.toggle(`finished`)
+
     } else {
         console.log(`No click `);
     }
